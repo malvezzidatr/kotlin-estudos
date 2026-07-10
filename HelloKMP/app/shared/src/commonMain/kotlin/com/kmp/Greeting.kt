@@ -6,4 +6,8 @@ class Greeting {
     fun greet(): String {
         return sayHello(platform.name)
     }
+
+    fun writeDummyFile() {
+        FileStorage("temp.txt").write("Hello there!")
+    }
 }
