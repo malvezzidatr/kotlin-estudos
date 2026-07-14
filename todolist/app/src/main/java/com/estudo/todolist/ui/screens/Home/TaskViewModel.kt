@@ -21,12 +21,6 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = TaskUiState.Loading
         )
-    val tasks: StateFlow<List<Task>> = repository.tasks
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = emptyList()
-        )
 
     fun addTask(description: String) {
         if (description.isBlank()) return
