@@ -16,21 +16,17 @@ import com.estudo.todolist.data.TaskDatabase
 import com.estudo.todolist.data.TaskRepository
 import com.estudo.todolist.ui.TaskScreen
 import com.estudo.todolist.ui.TaskViewModel
-import com.estudo.todolist.ui.TaskViewModelFactory
 import com.estudo.todolist.ui.theme.TodolistTheme
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val database = TaskDatabase.getDatabase(applicationContext)
-        val repository = TaskRepository(database.taskDao())
 
         setContent {
             TodolistTheme {
-                val viewModel: TaskViewModel = viewModel(
-                    factory = TaskViewModelFactory(repository)
-                )
+                val viewModel: TaskViewModel = koinViewModel()
                 TaskScreen(viewModel = viewModel)
             }
         }
