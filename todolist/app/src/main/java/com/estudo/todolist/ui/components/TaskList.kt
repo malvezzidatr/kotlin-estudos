@@ -13,6 +13,7 @@ fun TaskList(
     tasks: List<Task>,
     onToggleCompleted: (Task) -> Unit,
     onRemove: (Task) -> Unit,
+    onTaskClick: (Task) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column() {
@@ -22,6 +23,7 @@ fun TaskList(
                     task,
                     onToggleCompleted = { onToggleCompleted(task) },
                     onRemove = { onRemove(task) },
+                    onClick = { onTaskClick(task) }
                 )
             }
         }
@@ -40,6 +42,7 @@ fun TaskListPreview() {
     TaskList(
         tasks = tasksFake,
         onToggleCompleted = {},
-        onRemove = {}
+        onRemove = {},
+        onTaskClick = {}
     )
 }

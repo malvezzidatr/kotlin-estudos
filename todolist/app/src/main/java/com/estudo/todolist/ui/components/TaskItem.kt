@@ -1,5 +1,6 @@
 package com.estudo.todolist.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,11 +21,13 @@ import com.estudo.todolist.data.Task
 fun TaskItem(
     task: Task,
     onRemove: () -> Unit,
+    onClick: () -> Unit,
     onToggleCompleted: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -48,6 +51,7 @@ fun TaskItemPreview() {
     TaskItem(
         task = Task(id = 1, description = "Comprar leite", completed = false),
         onToggleCompleted = {},
-        onRemove = {}
+        onRemove = {},
+        onClick = {},
     )
 }
