@@ -1,9 +1,27 @@
 package com.estudo.todolist.ui.navigation
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.estudo.todolist.ui.screens.Home.TaskScreen
@@ -39,6 +57,46 @@ fun NavGraph() {
                 viewModel = viewModel,
                 onNavigateBack = { navController.popBackStack() }
             )
+        }
+    }
+}
+
+@Composable
+fun BottomBarWithFab(
+    navController: NavController,
+    onAddClick: () -> Unit,
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        NavigationBar(
+            containerColor = Color.White,
+            modifier = Modifier.height(70.dp)
+        ) {
+            bottomNavItems.take(1).forEach { item ->
+                NavItem(item, currentRoute, navController)
+            }
+
+            Spacer(modifier = Modifier.weight(1f, fill = true))
+
+            bottomNavItems.takeLast(1).forEach { item ->
+                NavItem(item, currentRoute, navController)
+            }
+        }
+
+        FloatingActionButton(
+            onClick = onAddClick,
+            shape = CircleShape,
+            containerColor = Color.Black,
+            contentColor = Color.White,
+            modifier = Modifier
+                .offset(y = (-20).dp)
+        ) {
+            Icon(Icons.Default.Add, contentDescription = "Adicionar tarefa")
         }
     }
 }

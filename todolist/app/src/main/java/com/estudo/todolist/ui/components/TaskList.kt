@@ -30,19 +30,19 @@ fun TaskList(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun TaskListPreview() {
-    val tasksFake = listOf(
-        Task(id = 1, description = "Comprar leite", completed = false),
-        Task(id = 2, description = "Estudar Kotlin", completed = true),
-        Task(id = 3, description = "Fazer exercício", completed = true)
-    )
-
-    TaskList(
-        tasks = tasksFake,
-        onToggleCompleted = {},
-        onRemove = {},
-        onTaskClick = {}
-    )
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun TaskListPreview() {
+//    val tasksFake = listOf(
+//        Task(id = 1, description = "Comprar leite", completed = false),
+//        Task(id = 2, description = "Estudar Kotlin", completed = true),
+//        Task(id = 3, description = "Fazer exercício", completed = true)
+//    )
+//
+//    TaskList(
+//        tasks = tasksFake,
+//        onToggleCompleted = {},
+//        onRemove = {},
+//        onTaskClick = {}
+//    )
+//}

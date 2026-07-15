@@ -13,8 +13,14 @@ interface TaskDao {
     @Query("SELECT * FROM tasks ORDER BY id DESC")
     fun observableTasks(): Flow<List<Task>>
 
-    @Query("SELECT * FROM tasks WHERE ID = :taskId")
+    @Query("SELECT * FROM tasks WHERE id = :taskId")
     fun observableTaskById(taskId: Int): Flow<Task?>
+
+    @Query("SELECT * FROM tasks WHERE completed = 0 AND progress > 0 ORDER BY dueDate ASC")
+    fun observableInProgressTasks(): Flow<List<Task>>
+
+    @Query("SELECT * FROM tasks WHERE completed = 0 AND progress = 0 ORDER BY dueDate ASC")
+    fun observableToDoTasks(): Flow<List<Task>>
 
     @Insert
     suspend fun insert(task: Task)

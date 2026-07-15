@@ -55,13 +55,13 @@ fun TaskItem(
     }
 }
 
-@Preview
-@Composable
-fun TaskItemPreview() {
-    TaskItem(
-        task = Task(id = 1, description = "Comprar leite", completed = false),
-        onToggleCompleted = {},
-        onRemove = {},
-        onClick = {},
-    )
-}
+//@Preview
+//@Composable
+//fun TaskItemPreview() {
+//    TaskItem(
+//        task = Task(id = 1, description = "Comprar leite", completed = false),
+//        onToggleCompleted = {},
+//        onRemove = {},
+//        onClick = {},
+//    )
+//}

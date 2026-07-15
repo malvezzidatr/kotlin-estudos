@@ -10,12 +10,39 @@ class TaskRepository(private val dao: TaskDao) {
         return dao.observableTaskById(taskId)
     }
 
+    fun observableInProgressTasks(): Flow<List<Task>> {
+        return dao.observableInProgressTasks()
+    }
+
+    fun observableToDoTasks(): Flow<List<Task>> {
+        return dao.observableToDoTasks()
+    }
+
     suspend fun updateDescription(task: Task, newDescription: String) {
         dao.update(task.copy(description = newDescription))
     }
 
-    suspend fun addTask(description: String) {
-        dao.insert(Task(description = description))
+    suspend fun addTask(
+        title: String,
+        description: String,
+        category: String,
+        dueDate: Long,
+        progress: Float = 0f
+    ) {
+        dao.insert(
+            Task(
+                title = title,
+                description = description,
+                category = category,
+                dueDate = dueDate,
+                progress = progress
+            )
+        )
+    }
+
+    suspend fun updateProgress(task: Task, newProgress: Float) {
+        val clamped = newProgress.coerceIn(0f, 1f)
+        dao.update(task.copy(progress = clamped, completed = clamped >= 1f))
     }
 
     suspend fun toggleCompleted(task: Task) {

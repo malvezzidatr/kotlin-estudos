@@ -10,6 +10,7 @@
     import androidx.compose.foundation.layout.fillMaxWidth
     import androidx.compose.foundation.layout.height
     import androidx.compose.foundation.layout.padding
+    import androidx.compose.foundation.layout.width
     import androidx.compose.material3.CircularProgressIndicator
     import androidx.compose.material3.ExperimentalMaterial3Api
     import androidx.compose.material3.Scaffold
@@ -24,10 +25,13 @@
     import androidx.compose.ui.Alignment
     import androidx.compose.ui.Modifier
     import androidx.compose.ui.graphics.Color
+    import androidx.compose.ui.text.font.FontWeight
     import androidx.compose.ui.tooling.preview.Preview
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
     import com.estudo.todolist.data.Task
+    import com.estudo.todolist.ui.components.TaskCard
+    import com.estudo.todolist.ui.components.TaskCarousel
     import com.estudo.todolist.ui.components.TaskInputField
     import com.estudo.todolist.ui.components.TaskList
 
@@ -65,6 +69,7 @@
         onRemove: (Task) -> Unit,
         onTaskClick: (Task) -> Unit,
     ) {
+
         Scaffold(
             topBar = { TopAppBar(title = { Text("My Tasks") }) }
         ) { padding ->
@@ -81,22 +86,7 @@
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 
-                Row(
-                    Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    Text(
-                        fontSize = 16.sp,
-                        text = "To-do"
-                    )
-                    Text(
-                        fontSize = 11.sp,
-                        text = "See all"
-                    )
-                }
-                Spacer(Modifier.height(16.dp))
+
                 when (uiState) {
                     is TaskUiState.Loading -> {
                         Box(
@@ -108,11 +98,50 @@
                     }
 
                     is TaskUiState.Success -> {
-                        TaskList(
-                            tasks = uiState.tasks,
-                            onToggleCompleted = onToggleCompleted,
-                            onRemove = onRemove,
-                            onTaskClick= onTaskClick,
+                        Row(
+                            Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            Text(
+                                fontSize = 16.sp,
+                                text = "To-do",
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                fontSize = 11.sp,
+                                text = "See all"
+                            )
+                        }
+                        Spacer(Modifier.height(16.dp))
+                        TaskCarousel(uiState.tasks, null, Color(0xFFE6FFE0))
+                        Spacer(Modifier.height(16.dp))
+                        Row(
+                            Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                        ) {
+                            Text(
+                                fontSize = 16.sp,
+                                text = "In progress",
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                fontSize = 11.sp,
+                                text = "See all"
+                            )
+                        }
+                        Spacer(Modifier.height(16.dp))
+                        TaskCard(
+                            category = "Client Work",
+                            title = "Felix Website Design",
+                            time = "till Friday 8.00 AM",
+                            footerRight = "60%",
+                            backgroundColor = Color(0xFFE6E1FF),
+                            progress = 0.60f,
+                            modifier = Modifier.width(230.dp)
                         )
                     }
 
@@ -147,12 +176,47 @@
     @Preview(showBackground = true)
     @Composable
     fun TaskScreenContentSuccessPreview() {
-        TaskScreenContent(
-            uiState = TaskUiState.Success(
-                listOf(
-                    Task(id = 1, description = "Comprar leite", completed = false),
-                )
+        val tasksFake = listOf(
+            Task(
+                id = 1,
+                title = "Comprar leite",
+                description = "Ir ao mercado e comprar leite integral",
+                category = "Personal work",
+                dueDate = System.currentTimeMillis(),
+                progress = 0f,
+                completed = false
             ),
+            Task(
+                id = 2,
+                title = "Estudar Kotlin",
+                description = "Revisar coroutines e Flow",
+                category = "Office work",
+                dueDate = System.currentTimeMillis(),
+                progress = 1f,
+                completed = true
+            ),
+            Task(
+                id = 3,
+                title = "Fazer exercício",
+                description = "Treino de pernas na academia",
+                category = "Client Work",
+                dueDate = System.currentTimeMillis(),
+                progress = 1f,
+                completed = true
+            ),
+            Task(
+                id = 4,
+                title = "Felix Website Design",
+                description = "Finalizar layout do site do cliente",
+                category = "Client Work",
+                dueDate = System.currentTimeMillis(),
+                progress = 0.56f,
+                completed = false
+            )
+        )
+
+        TaskScreenContent(
+            uiState = TaskUiState.Success(tasksFake),
             newTask = "",
             onNewTaskChange = {},
             onAddClick = {},
