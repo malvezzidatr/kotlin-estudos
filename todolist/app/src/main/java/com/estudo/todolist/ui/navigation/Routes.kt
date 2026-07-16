@@ -25,6 +25,5 @@ data class BottomNavItem(
 
 val bottomNavItems = listOf(
     BottomNavItem(Routes.TaskList.route, Icons.Default.Home),
-    BottomNavItem(Routes.AddTask.route, Icons.AutoMirrored.Filled.Assignment),
     BottomNavItem(Routes.Config.route, Icons.Default.Settings),
 )

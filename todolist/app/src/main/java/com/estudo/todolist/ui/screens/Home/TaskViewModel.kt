@@ -1,5 +1,9 @@
 package com.estudo.todolist.ui.screens.Home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.estudo.todolist.data.Task
@@ -12,7 +16,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
-
     val uiState: StateFlow<TaskUiState> = repository.tasks
         .map<List<Task>, TaskUiState> { tasks -> TaskUiState.Success(tasks) }
         .catch { error -> emit(TaskUiState.Error(error.message ?: "Erro desconhecido")) }
@@ -25,7 +28,7 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
     fun addTask(description: String) {
         if (description.isBlank()) return
         viewModelScope.launch {
-            repository.addTask(description)
+//            repository.addTask(description)
         }
     }
 

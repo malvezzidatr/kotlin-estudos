@@ -2,6 +2,7 @@ package com.estudo.todolist.di
 
 import com.estudo.todolist.data.TaskDatabase
 import com.estudo.todolist.data.TaskRepository
+import com.estudo.todolist.ui.screens.AddTaskSheet.AddTaskSheetViewModel
 import com.estudo.todolist.ui.screens.TaskDetails.TaskDetailViewModel
 import com.estudo.todolist.ui.screens.Home.TaskViewModel
 import org.koin.android.ext.koin.androidContext
@@ -23,5 +24,9 @@ val appModule = module {
 
     viewModel {
         TaskDetailViewModel(get(), get())
+    }
+
+    viewModel {
+        AddTaskSheetViewModel(get())
     }
 }

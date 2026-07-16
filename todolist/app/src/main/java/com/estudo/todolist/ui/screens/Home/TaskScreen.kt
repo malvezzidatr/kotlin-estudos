@@ -13,6 +13,7 @@
     import androidx.compose.foundation.layout.width
     import androidx.compose.material3.CircularProgressIndicator
     import androidx.compose.material3.ExperimentalMaterial3Api
+    import androidx.compose.material3.ModalBottomSheet
     import androidx.compose.material3.Scaffold
     import androidx.compose.material3.Text
     import androidx.compose.material3.TopAppBar
@@ -30,6 +31,7 @@
     import androidx.compose.ui.unit.dp
     import androidx.compose.ui.unit.sp
     import com.estudo.todolist.data.Task
+    import com.estudo.todolist.ui.components.HomeTopBar
     import com.estudo.todolist.ui.components.TaskCard
     import com.estudo.todolist.ui.components.TaskCarousel
     import com.estudo.todolist.ui.components.TaskInputField
@@ -71,7 +73,9 @@
     ) {
 
         Scaffold(
-            topBar = { TopAppBar(title = { Text("My Tasks") }) }
+            topBar = {
+                TopAppBar({ HomeTopBar() })
+            }
         ) { padding ->
             Column(
                 modifier = Modifier
@@ -79,14 +83,6 @@
                     .padding(16.dp)
                     .fillMaxSize()
             ) {
-                TaskInputField(
-                    newTask = newTask,
-                    onValueChange = onNewTaskChange,
-                    onAddClick = onAddClick
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                
-
                 when (uiState) {
                     is TaskUiState.Loading -> {
                         Box(
@@ -150,7 +146,7 @@
                             modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text("Erro: ${uiState.message}")
+                            Text("Error: ${uiState.message}")
                         }
                     }
                 }

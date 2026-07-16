@@ -3,12 +3,20 @@ package com.estudo.todolist.ui.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.estudo.todolist.data.Task
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
+fun Long.toTimeString(): String {
+    val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+    return formatter.format(Date(this))
+}
 @Composable
 fun TaskCarousel(
     tasks: List<Task>,
@@ -18,11 +26,11 @@ fun TaskCarousel(
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        items(tasks.size) { task ->
+        items(tasks) { task ->
             TaskCard(
-                category = "teste",
-                title = "Teste",
-                time = "10h00AM",
+                category = task.category,
+                title = task.title,
+                time = task.dueDate.toTimeString(),
                 footerRight = "Today",
                 backgroundColor = backgroundColor,
                 progress = progress
