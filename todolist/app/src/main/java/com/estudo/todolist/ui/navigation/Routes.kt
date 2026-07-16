@@ -16,6 +16,8 @@ sealed class Routes(val route: String) {
     object AddTask : Routes("add_task")
 
     object Config : Routes("user_config")
+
+    object Welcome : Routes("welcome")
 }
 
 data class BottomNavItem(

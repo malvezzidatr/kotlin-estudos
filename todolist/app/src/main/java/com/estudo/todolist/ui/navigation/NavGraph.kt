@@ -38,6 +38,7 @@ import com.estudo.todolist.ui.screens.Home.TaskScreen
 import com.estudo.todolist.ui.screens.Home.TaskViewModel
 import com.estudo.todolist.ui.screens.TaskDetails.TaskDetailScreen
 import com.estudo.todolist.ui.screens.TaskDetails.TaskDetailViewModel
+import com.estudo.todolist.ui.screens.Welcome.WelcomeScreen
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -80,6 +81,12 @@ fun NavGraph() {
                         viewModel = viewModel,
                         onNavigateBack = { navController.popBackStack() }
                     )
+                }
+
+                composable(
+                    Routes.Welcome.route
+                ) {
+                    WelcomeScreen()
                 }
 
                 bottomSheet(Routes.AddTask.route, ) {
