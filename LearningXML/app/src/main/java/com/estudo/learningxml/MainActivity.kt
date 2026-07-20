@@ -3,6 +3,8 @@ package com.estudo.learningxml
 import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +17,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var myText: TextView
     lateinit var myButton1: Button
     lateinit var myButton2: Button
+
+    lateinit var nameText: TextView
+
+    lateinit var name: EditText
+
+    lateinit var ok: Button
+
+    lateinit var image: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +49,17 @@ class MainActivity : AppCompatActivity() {
         myButton2.setOnClickListener {
             myText.isVisible = true
             myButton1.isVisible = true
+        }
+
+        ok = findViewById(R.id.confirm_button)
+        nameText = findViewById(R.id.text_confirm)
+        name = findViewById(R.id.edit_text)
+        image = findViewById(R.id.imageView)
+
+        ok.setOnClickListener {
+            var userName: String = name.text.toString()
+            nameText.setText(userName)
+            image.setImageResource(R.drawable.image2)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
