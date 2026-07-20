@@ -14,14 +14,23 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textExample"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="50dp"
             android:layout_marginTop="52dp"
-            android:text="TextView"
+            android:background="#972A2A"
+            android:backgroundTint="#B15151"
+            android:rotation="19"
+            android:rotationX="-28"
+            android:rotationY="36"
+            android:text="Hello world"
+            android:textAlignment="viewEnd"
+            android:textColor="#0C1AE0"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/textView3"
