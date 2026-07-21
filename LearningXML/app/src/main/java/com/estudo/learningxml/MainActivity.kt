@@ -2,9 +2,11 @@ package com.estudo.learningxml
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,12 +31,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var image: ImageView
 
     lateinit var showToastButton: Button
+    lateinit var showSnackbarButton: Button
+    lateinit var mainLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         showToastButton = findViewById(R.id.show_toast)
+        showSnackbarButton = findViewById(R.id.show_snackbar)
+        mainLayout = findViewById(R.id.main)
         myText = findViewById(R.id.textExample)
         myButton1 = findViewById(R.id.buttonExample1)
         myButton2 = findViewById(R.id.buttonExample2)
@@ -68,6 +75,16 @@ class MainActivity : AppCompatActivity() {
 
         showToastButton.setOnClickListener {
             Toast.makeText(applicationContext, "This is a toast message!", Toast.LENGTH_LONG).show()
+        }
+
+        showSnackbarButton.setOnClickListener {
+            Snackbar
+                .make(
+                    mainLayout,
+                    "This is a snackbar message",
+                    Snackbar.LENGTH_INDEFINITE)
+                .setAction("Close", View.OnClickListener {})
+                .show()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
