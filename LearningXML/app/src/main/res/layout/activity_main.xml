@@ -19,6 +19,16 @@
         tools:text="Show toast" />
 
     <Button
+        android:id="@+id/show_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:height="100dp"
+        android:insetTop="0dp"
+        android:text="Show dialog"
+        tools:text="Show dialog" />
+
+    <Button
         android:id="@+id/show_snackbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

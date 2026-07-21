@@ -1,5 +1,6 @@
 package com.estudo.learningxml
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var showToastButton: Button
     lateinit var showSnackbarButton: Button
+    lateinit var showDialogButton: Button
     lateinit var mainLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         showToastButton = findViewById(R.id.show_toast)
         showSnackbarButton = findViewById(R.id.show_snackbar)
         mainLayout = findViewById(R.id.main)
+        showDialogButton = findViewById(R.id.show_dialog)
         myText = findViewById(R.id.textExample)
         myButton1 = findViewById(R.id.buttonExample1)
         myButton2 = findViewById(R.id.buttonExample2)
@@ -85,6 +89,32 @@ class MainActivity : AppCompatActivity() {
                     Snackbar.LENGTH_INDEFINITE)
                 .setAction("Close", View.OnClickListener {})
                 .show()
+        }
+
+        fun showAlertDialog() {
+            val alertDialog = AlertDialog.Builder(this@MainActivity)
+            alertDialog
+                .setTitle("Change")
+                .setMessage("Do you want to change this?")
+                .setIcon(R.drawable.outline_light_mode_24)
+                .setCancelable(false)
+                .setNegativeButton(
+                    "No",
+                    DialogInterface.OnClickListener { dialogInterface, which ->
+                        dialogInterface.cancel()
+                    }
+                )
+                .setPositiveButton(
+                    "Yes",
+                    DialogInterface.OnClickListener { dialogInterface, which ->
+                    showDialogButton.text = "Alert dialog"
+                })
+
+            alertDialog.create().show()
+        }
+
+        showDialogButton.setOnClickListener {
+            showAlertDialog()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
