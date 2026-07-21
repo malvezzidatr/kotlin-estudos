@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,10 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var image: ImageView
 
+    lateinit var showToastButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        showToastButton = findViewById(R.id.show_toast)
         myText = findViewById(R.id.textExample)
         myButton1 = findViewById(R.id.buttonExample1)
         myButton2 = findViewById(R.id.buttonExample2)
@@ -60,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             var userName: String = name.text.toString()
             nameText.setText(userName)
             image.setImageResource(R.drawable.image2)
+        }
+
+        showToastButton.setOnClickListener {
+            Toast.makeText(applicationContext, "This is a toast message!", Toast.LENGTH_LONG).show()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

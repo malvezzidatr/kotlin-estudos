@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/show_toast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:height="100dp"
+        android:insetTop="0dp"
+        android:text="Show toast"
+        tools:text="Show toast" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
