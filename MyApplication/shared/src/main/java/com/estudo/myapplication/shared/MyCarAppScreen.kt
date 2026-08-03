@@ -48,6 +48,11 @@ class MyCarAppScreen(carContext: CarContext) : Screen(carContext) {
             .setImage(fuelIcon)
             .build()
 
+        val estimateRangeRow = Row.Builder()
+            .setTitle("Autonomia estimada")
+            .addText("%.0f km".format(status.estimateRange))
+            .build()
+
         val detailsRow = Row.Builder()
             .setTitle("Ver mais detalhes")
             .addText("Toque para abrir")
@@ -59,6 +64,7 @@ class MyCarAppScreen(carContext: CarContext) : Screen(carContext) {
         val itemList = ItemList.Builder()
             .addItem(speedRow)
             .addItem(fuelRow)
+            .addItem(estimateRangeRow)
             .addItem(detailsRow)
             .build()
 

@@ -15,4 +15,12 @@ class VehicleRepositoryImpl(private val dataSource: VehicleInfoDataSource) : Veh
         }
     }
 
+    override fun observeRangeRemainingKm(onRangeChanged: (Float?) -> Unit) {
+        dataSource.observeEnergyLevel  { energyData ->
+            val rangeMeters = energyData.rangeRemainingMeters.value
+            val rangeKm = rangeMeters?.let { it / 1000f }
+            onRangeChanged(rangeKm)
+        }
+    }
+
 }
