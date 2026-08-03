@@ -1,0 +1,8 @@
+com.estudo.myapplication.shared-pngs-0 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\generated\res\pngs\debug
+com.estudo.myapplication.shared-updated_navigation_xml-1 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\generated\updated_navigation_xml\debug
+com.estudo.myapplication.shared-mergeDebugResources-2 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.estudo.myapplication.shared-mergeDebugResources-3 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.estudo.myapplication.shared-debug-4 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\intermediates\merged_res\debug\mergeDebugResources
+com.estudo.myapplication.shared-debug-5 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\build\intermediates\packaged_res\debug\packageDebugResources
+com.estudo.myapplication.shared-debug-6 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\debug\res
+com.estudo.myapplication.shared-main-7 C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\res
