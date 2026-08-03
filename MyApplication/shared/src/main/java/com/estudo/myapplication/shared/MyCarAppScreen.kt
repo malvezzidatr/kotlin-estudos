@@ -16,30 +16,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.IconCompat
 
 class MyCarAppScreen(carContext: CarContext) : Screen(carContext) {
-    private var currentSpeed: Float = 0f
-    private var currentFuelPercent: Float = 0f
+    private val dataSource = VehicleInfoDataSource(carContext)
+    private val repository: VehicleRepository = VehicleRepositoryImpl(dataSource)
+    private val useCase = ObserveVehicleStatusUseCase(repository)
+    private val viewModel = VehicleDashboardViewModel(useCase)
 
     init {
-        val carHardwareManager = carContext.getCarService(CarHardwareManager::class.java)
-        val carInfo = carHardwareManager.carInfo
-
-        carInfo.addSpeedListener(
-            ContextCompat.getMainExecutor(carContext)
-        ) {
-            speedData -> currentSpeed = speedData.rawSpeedMetersPerSecond.value ?: 0f
-            invalidate()
-        }
-
-        carInfo.addEnergyLevelListener(
-            ContextCompat.getMainExecutor(carContext)
-        ) {
-            energyData -> currentFuelPercent = energyData.fuelPercent.value ?: 0f
-            invalidate()
-
-        }
+        viewModel.start { invalidate() }
     }
+
     override fun onGetTemplate(): Template {
-        val speedKmh = currentSpeed * 3.6f
+        val status = viewModel.vehicleStatus
+
         val speedIcon = CarIcon.Builder(
             IconCompat.createWithResource(carContext, android.R.drawable.ic_menu_compass)
         ).build()
@@ -50,17 +38,17 @@ class MyCarAppScreen(carContext: CarContext) : Screen(carContext) {
 
         val speedRow = Row.Builder()
             .setTitle("Velocidade")
-            .addText("%.1f km/h".format(speedKmh))
+            .addText("%.1f km/h".format(status.speedKmh))
             .setImage(speedIcon)
             .build()
 
         val fuelRow = Row.Builder()
             .setTitle("Combustível")
-            .addText("%.1f%%".format(currentFuelPercent))
+            .addText("%.1f%%".format(status.fuelPercent))
             .setImage(fuelIcon)
             .build()
 
-        val detalhesRow = Row.Builder()
+        val detailsRow = Row.Builder()
             .setTitle("Ver mais detalhes")
             .addText("Toque para abrir")
             .setOnClickListener {
@@ -71,7 +59,7 @@ class MyCarAppScreen(carContext: CarContext) : Screen(carContext) {
         val itemList = ItemList.Builder()
             .addItem(speedRow)
             .addItem(fuelRow)
-            .addItem(detalhesRow)
+            .addItem(detailsRow)
             .build()
 
         return ListTemplate.Builder()
