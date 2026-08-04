@@ -1,6 +1,6 @@
 package com.estudo.pokedexapp.data.remote
 
-data class PokemonListDTO(
+data class PokemonListResponseDTO(
     val results: List<PokemonListItemDTO>
 )
 
