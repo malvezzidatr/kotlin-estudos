@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.estudo.pokedexapp.databinding.ActivityMainBinding
 import com.estudo.pokedexapp.domain.model.UiState
+import com.estudo.pokedexapp.ui.details.DetailActivity
 import com.estudo.pokedexapp.ui.list.PokemonAdapter
 import com.estudo.pokedexapp.ui.list.PokemonListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = PokemonAdapter { pokemon ->
-
+            val intent = DetailActivity.newIntent(this, pokemon.id)
+            startActivity(intent)
         }
         binding.recyclerViewPokemon.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewPokemon.adapter = adapter
