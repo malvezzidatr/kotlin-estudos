@@ -1,5 +1,7 @@
 package com.estudo.myapplication.shared.car.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
@@ -56,11 +58,24 @@ class MyCarAppScreen(
             }
             .build()
 
+        val mapsRow = Row.Builder()
+            .setTitle("Ir para o maps")
+            .addText("Toque para ir para o maps")
+            .setOnClickListener {
+                val navigationIntent = Intent(
+                    CarContext.ACTION_NAVIGATE,
+                    Uri.parse("geo:0,0?q=Avenida+Paulista")
+                )
+                carContext.startCarApp(navigationIntent)
+            }
+            .build()
+
         val itemList = ItemList.Builder()
             .addItem(speedRow)
             .addItem(fuelRow)
             .addItem(estimateRangeRow)
             .addItem(detailsRow)
+            .addItem(mapsRow)
             .build()
 
         return ListTemplate.Builder()
