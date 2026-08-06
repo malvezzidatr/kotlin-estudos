@@ -14,12 +14,12 @@ ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\A
 		ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:7:13-30
 	android:name
 		ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:6:13-59
-service#com.estudo.myapplication.shared.MyCarAppService
+service#com.estudo.myapplication.shared.car.MyCarAppService
 ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:9:9-17:19
 	android:exported
 		ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:11:13-36
 	android:name
-		ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:10:13-75
+		ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:10:13-79
 intent-filter#action:name:androidx.car.app.CarAppService+category:name:androidx.car.app.category.POI
 ADDED from C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:12:13-16:29
 action#androidx.car.app.CarAppService

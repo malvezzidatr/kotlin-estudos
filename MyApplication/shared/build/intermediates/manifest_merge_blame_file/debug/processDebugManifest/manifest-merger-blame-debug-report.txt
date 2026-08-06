@@ -19,8 +19,8 @@
 13
 14        <service
 14-->C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:9:9-17:19
-15            android:name="com.estudo.myapplication.shared.MyCarAppService"
-15-->C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:10:13-75
+15            android:name="com.estudo.myapplication.shared.car.MyCarAppService"
+15-->C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:10:13-79
 16            android:exported="true" >
 16-->C:\Users\malve\Desktop\Kotlin estudos\MyApplication\shared\src\main\AndroidManifest.xml:11:13-36
 17            <intent-filter>

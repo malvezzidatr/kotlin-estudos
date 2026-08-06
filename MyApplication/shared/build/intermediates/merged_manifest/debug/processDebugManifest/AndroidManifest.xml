@@ -12,7 +12,7 @@
             android:value="1" />
 
         <service
-            android:name="com.estudo.myapplication.shared.MyCarAppService"
+            android:name="com.estudo.myapplication.shared.car.MyCarAppService"
             android:exported="true" >
             <intent-filter>
                 <action android:name="androidx.car.app.CarAppService" />
