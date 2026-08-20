@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.AppCar" parent="Theme.AppCompat.DayNight.DarkActionBar" />
+</resources>
