@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import com.estudo.appcar.shared.vehicle.VehicleStatusViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.estudo.appcar.shared.vehicle.VehicleStatus
+import com.estudo.appcar.shared.vehicle.VehicleStatusUiState
 
 /**
  * Mesma tela que a MainActivity (XML), só que em Compose,
@@ -45,10 +47,32 @@ class ComposeActivity : ComponentActivity() {
 fun VehicleStatusScreen(
     viewModel: VehicleStatusViewModel = viewModel(),
 ) {
-    val status by viewModel.status.observeAsState()
+    val uiState by viewModel.uiState.observeAsState()
 
-    status?.let {
-        Text(text = "${it.speedKmh} km/h", fontSize = 32.sp)
+    when (val state = uiState) {
+        is VehicleStatusUiState.Loading -> LoadingContent()
+        is VehicleStatusUiState.Success -> SuccessContent(state.status)
+        is VehicleStatusUiState.Error -> ErrorContent(state.message)
+        null -> {}
     }
 
+}
+
+@Composable
+fun LoadingContent() {
+    Text("Loading....", fontSize = 24.sp)
+}
+
+@Composable
+fun SuccessContent(
+    status: VehicleStatus
+) {
+    Text("${status.speedKmh} km/h", fontSize = 24.sp)
+}
+
+@Composable
+fun ErrorContent(
+    message: String,
+) {
+    Text(message, fontSize = 24.sp)
 }

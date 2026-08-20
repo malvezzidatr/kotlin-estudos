@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.estudo.appcar.shared.vehicle.VehicleStatusUiState
 import com.estudo.appcar.shared.vehicle.VehicleStatusViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -18,8 +19,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         helloText = findViewById(R.id.textOla)
-        viewModel.status.observe(this) { status ->
-            helloText.text = "${status.speedKmh} km/h"
+        viewModel.uiState.observe(this) { vehicleStatus ->
+            when (vehicleStatus) {
+                is VehicleStatusUiState.Loading -> helloText.text = "Loading..."
+                is VehicleStatusUiState.Error -> {
+                    helloText.text = vehicleStatus.message
+                }
+                is VehicleStatusUiState.Success -> {
+                    helloText.text = "${vehicleStatus.status.speedKmh} km/h"
+                }
+            }
         }
 
         composeButton = findViewById(R.id.btnCompose)
