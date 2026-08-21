@@ -4,18 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.estudo.appcar.shared.vehicle.VehicleStatusViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.estudo.appcar.shared.vehicle.ClimateViewModel
 import com.estudo.appcar.shared.vehicle.VehicleStatus
 import com.estudo.appcar.shared.vehicle.VehicleStatusUiState
 
@@ -28,32 +32,47 @@ class ComposeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
             MaterialTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        VehicleStatusScreen()
-                    }
-                }
+                ClimateScreen()
             }
         }
     }
 }
 
 @Composable
+fun ClimateScreen(
+    viewModel: ClimateViewModel = viewModel()
+){
+    val uiState by viewModel.climateState.collectAsStateWithLifecycle()
+
+    Column() {
+        Row() {
+            Text("${uiState.desiredTempC}ºC")
+            Text("${uiState.currentCabinTempC}ºC")
+        }
+        Row() {
+            Button(onClick = { viewModel.decreaseTemp() }) {
+                Text("-")
+            }
+            Button(onClick = { viewModel.increaseTemp() }) {
+                Text("+")
+            }
+        }
+    }
+
+
+}
+
+@Composable
 fun VehicleStatusScreen(
     viewModel: VehicleStatusViewModel = viewModel(),
 ) {
-    val uiState by viewModel.uiState.observeAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     when (val state = uiState) {
         is VehicleStatusUiState.Loading -> LoadingContent()
         is VehicleStatusUiState.Success -> SuccessContent(state.status)
         is VehicleStatusUiState.Error -> ErrorContent(state.message)
-        null -> {}
     }
 
 }
